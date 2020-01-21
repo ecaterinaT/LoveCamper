@@ -5,9 +5,9 @@ if(empty($_POST['fullname']) || empty($_POST['email']) || empty($_POST['telefon'
   exit();
 }
 
-$name = strip_tags(htmlspecialchars($_POST['fullname']));
+$fullname = strip_tags(htmlspecialchars($_POST['fullname']));
 $email = strip_tags(htmlspecialchars($_POST['email']));
-$phone = strip_tags(htmlspecialchars($_POST['telefon']));
+$telefon = strip_tags(htmlspecialchars($_POST['telefon']));
 $message = strip_tags(htmlspecialchars($_POST['message']));
 
 // Create the email and send the message
@@ -16,11 +16,17 @@ $subject = "Website Contact Form:  $fullname";
 $body = "Mesaj nou.\n\n"."Detalii:\n\nName: $fullname\n\nEmail: $email\n\nTelefon: $telefon\n\nMesaj:\n$message";
 $header = "From: noreply@lovecamper.com\n"; // This is the email address the generated message will be from. We recommend using something like noreply@yourdomain.com.
 $header .= "Reply-To: $email";	
+// ini_set();
+// if(!mail($to, $subject, $body, $header)){
+//   echo "Merge";
+// }else {
+//   echo "Nu merge";
+// }
+if(mail($to, $subject, $body, $header)){
+  echo"<p class='succes'>Mesaj trimis cu succes!</p>";
+  }else{
+    echo"<p class='Error'>Esuare trimitere mesaj</p>";
+  }
 
-if(!mail($to, $subject, $body, $header)){
-  echo "Merge";
-}else {
-  echo "Nu merge";
-}
 
 ?>
